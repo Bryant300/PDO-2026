@@ -7,9 +7,11 @@ $connexionPDO = new PDO(
     username: "root",  
     password: "" ,
 );
-$request = $connexionPDO->query("SELECT * FROM countries");
+$request = $connexionPDO->query("SELECT * FROM countries LIMIT 10");
 var_dump($connexionPDO,$request);
 
 while ($item = $request->fetch(PDO::FETCH_ASSOC)) {
     echo $item['nom']. " | " ;
 }
+
+$request->closeCursor(); #ferme la connexion à la BDD
