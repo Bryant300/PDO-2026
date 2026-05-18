@@ -15,6 +15,8 @@ function addCommentaire(PDO $pdo, string $email, string $fullName, string $title
 {
     $sql = "INSERT INTO commentaire (email, full_name, title, text_comment)
             VALUES (:email, :full_name, :title, :text_comment)";
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $fullName = htmlentities(trim(strip_tags)($fullName));
 
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
